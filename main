@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+from car_simulator import CarSimulator
+from visualizer import plot_trajectory, plot_accelerations
+from util import get_circle_steering_angle
+import sequence
+import sys
+
+
+def start_simulation(simulator: CarSimulator, dt: float = 0.1, simulation_time: float = 100) -> None:
+    """
+    start the simulation, which:
+        - The vehicle starts at 0 m/s
+        - The vehicle drives on a straight line and accelerates from 0 m/s to 10 m/s at a constant rate of 0.4 m/s^2,
+          then it proceeds at constant speed.
+        - Once reached the speed of 10 m/s, the vehicle drives in a clockwise circle of roughly 100 m radius
+        - the simulation ends at 100s by default
+    :param simulator: simulator instance
+    :param dt: dt: duration of time after which we want to provide a state update (time step)
+    :param simulation_time: runtime of the simulation, by default is 100 seconds
+    """
+    epoch = 0
+    circle_steering_angle = get_circle_steering_angle(simulator.wheelbase, 100)
+    while epoch < simulation_time:
+        if simulator.v < 10:
+            simulator.simulator_step(a=0.4, wheel_angle=0, dt=dt)
+        else:
+            simulator.simulator_step(a=0, wheel_angle=circle_steering_angle, dt=dt)
+        epoch += dt
+
+
+def main() -> None:
+    """
+    entry point to the application. It creates and starts the simulator,
+    then plot the result and save them in output folder
+    """
+    wheelbase = 4
+    v0 = 0
+    theta0 = 0
+    simulator = CarSimulator(wheelbase, v0, theta0)
+    start_simulation(simulator)
+    if not hasattr(simulator, 'state_tracker'):
+        raise AttributeError('Simulator has no state_tracker')
+    plot_trajectory(simulator.state_tracker['x'], simulator.state_tracker['y'])
+    plot_accelerations(simulator.state_tracker['timestamp'],
+                       simulator.state_tracker['a'],
+                       simulator.state_tracker['la'])
+
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1 and sys.argv[1] == 'carsim':
+        main()
+    elif len(sys.argv) > 1 and sys.argv[1] == 'sequence':
+        sequence.main()
+    else:
+        print("Please provide a valid argument: try './main carsim' or './main sequence'")

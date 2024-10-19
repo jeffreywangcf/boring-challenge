@@ -1,0 +1,1 @@
+linear regression r2 of the execution time vs nth sequence: 85.81661284252289%
