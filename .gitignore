@@ -1,0 +1,9 @@
+.Python
+build/
+.idea/
+.DS_Store
+venv/
+ENV/
+env/
+venv.bak/
+env.bak/
