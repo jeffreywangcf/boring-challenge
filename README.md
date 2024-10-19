@@ -46,7 +46,7 @@ b) I put my justification inside `sequence.py`.
 
 c) I plotted the execution time for computing terms from 0 to 100,000. The graph shows that the time taken scales linearly with the size of $ n $. You can find this plot saved as `output/sequence_calculator_time.png`.
 
-d) To verify the empirical time complexity, I performed a linear regression and computed the $ R^2 $ score with `scikit-learn`. From my analysis, the $ R^2 $ score is $96.06%$.
+d) To verify the empirical time complexity, I performed a linear regression and computed the $ R^2 $ score with `scikit-learn`. From my analysis, the $ R^2 $ score is $85.81%$.
 
 ## Challenge & Strength
 
