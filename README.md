@@ -24,6 +24,7 @@ To get started with this project, follow these steps:
      ```bash
      ./main sequence
      ```
+> Note: If you still see package not installed error after running 3, make sure that you are using a virtual environment!
 
 ## Results
 
