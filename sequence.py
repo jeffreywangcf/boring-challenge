@@ -71,7 +71,7 @@ def plot_execution_time(n: int = 100000) -> None:
 
 
 # 4)
-# from my local run, the R^2 score is 96.06%, which justifies that the runtime vs number of n is a linear relation
+# from my local run, the R^2 score is 85.81%, which justifies that the runtime vs number of n is a linear relation
 def linear_fit(counts: list, times: list) -> None:
     """
     calculate the R^2 based on linear regression model, and save the result to output
